@@ -30,7 +30,7 @@ const App = () => {
     <div className="App">
       <Navbar color="light" light expand="md">
         <NavbarBrand href="/">
-          <h1 className="Header">Characters</h1>
+          <h1 className="Header">Star Wars Characters List</h1>
         </NavbarBrand>
       </Navbar>
 

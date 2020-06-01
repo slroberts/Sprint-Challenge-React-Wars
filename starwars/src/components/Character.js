@@ -57,7 +57,6 @@ const Character = (props) => {
             </ListGroup>
           </Collapse>
         </Characteristics>
-        {/* </CardText> */}
       </CardBody>
     </Card>
   );
