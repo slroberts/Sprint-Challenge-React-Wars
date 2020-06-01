@@ -3,7 +3,7 @@ import "./App.css";
 
 import axios from "axios";
 import Character from "./components/Character";
-import {Container, Row, Col} from "reactstrap";
+import {Container, Row, Col, Navbar, NavbarBrand} from "reactstrap";
 
 const App = () => {
   // Try to think through what state you'll need for this app before starting. Then build out
@@ -28,10 +28,15 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1 className="Header">Characters</h1>
+      <Navbar color="light" light expand="md">
+        <NavbarBrand href="/">
+          <h1 className="Header">Characters</h1>
+        </NavbarBrand>
+      </Navbar>
+
       <Container>
         <Row>
-          <Col sm="12" md={{size: 6, offset: 3}}>
+          <Col sm="12" md={{size: 4, offset: 4}}>
             {" "}
             {characters.map((character) => {
               return (

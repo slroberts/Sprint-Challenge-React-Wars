@@ -29,7 +29,7 @@ const Character = (props) => {
       key={props.name}
       className="text-left"
       style={{
-        marginBottom: "2rem",
+        margin: "2rem 0",
         opacity: ".85",
         textTransform: "capitalize",
       }}
@@ -39,13 +39,12 @@ const Character = (props) => {
           <h2>{props.name}</h2>
         </CardTitle>
         <CardSubtitle
-          style={{marginBottom: "1rem"}}
+          style={{margin: "1rem"}}
           className="text-center"
           onClick={() => toggle()}
         >
           <Button color="warning">See Characteristics</Button>{" "}
         </CardSubtitle>
-        {/* <CardText> */}
         <Characteristics>
           <Collapse isOpen={isOpen}>
             <ListGroup>
