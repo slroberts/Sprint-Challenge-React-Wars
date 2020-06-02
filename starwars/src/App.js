@@ -3,12 +3,18 @@ import "./App.css";
 
 import axios from "axios";
 import Character from "./components/Character";
-import {Container, Row, Col, Navbar, NavbarBrand} from "reactstrap";
+import {Container, Row, Col, Navbar, NavbarBrand, Input} from "reactstrap";
 
 const App = () => {
   // Try to think through what state you'll need for this app before starting. Then build out
   // the state properties here.
   const [characters, setCharacters] = useState([]);
+  const [searchName, setSearchName] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleChange = (e) => {
+    setSearchName(e.target.value);
+  };
 
   // Fetch characters from the API in an effect hook. Remember, anytime you have a
   // side effect in a component, you want to think about which state and/or props it should
@@ -19,12 +25,17 @@ const App = () => {
       .get("https://swapi.py4e.com/api/people/")
       .then((response) => {
         setCharacters(response.data.results);
-        console.log(response.data.results);
+        // console.log(response.data.results);
       })
       .catch((error) => {
         console.log("Bruh!", error);
       });
-  }, []);
+
+    const results = characters.filter((character) => {
+      character.name.toLowerCase().includes(searchName);
+    });
+    setSearchResults(results);
+  }, [searchName]);
 
   return (
     <div className="App">
@@ -35,10 +46,19 @@ const App = () => {
       </Navbar>
 
       <Container>
+        <Row style={{marginTop: "2rem"}}>
+          <Input
+            type="text"
+            placeholder="Search"
+            value={searchName}
+            onChange={handleChange}
+          />
+        </Row>
         <Row>
-          <Col sm="12" md={{size: 4, offset: 4}}>
+          <Col sm="12" md={{size: 6, offset: 3}}>
             {" "}
             {characters.map((character) => {
+              console.log(searchResults);
               return (
                 <Character
                   key={character.name}

@@ -12,16 +12,17 @@ import {
 } from "reactstrap";
 import styled from "styled-components";
 
+const Characteristics = styled.ul`
+  list-style: none;
+  margin-left: -2.4rem;
+`;
+
 const Character = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => {
     setIsOpen(!isOpen);
   };
-  const Characteristics = styled.ul`
-    list-style: none;
-    margin-left: -2.4rem;
-  `;
 
   return (
     <Card
