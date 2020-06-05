@@ -10,11 +10,7 @@ const App = () => {
   // the state properties here.
   const [characters, setCharacters] = useState([]);
   const [searchName, setSearchName] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-
-  const handleChange = (e) => {
-    setSearchName(e.target.value);
-  };
+  const [searchResults, setSearchResults] = useState(characters);
 
   // Fetch characters from the API in an effect hook. Remember, anytime you have a
   // side effect in a component, you want to think about which state and/or props it should
@@ -25,17 +21,21 @@ const App = () => {
       .get("https://swapi.py4e.com/api/people/")
       .then((response) => {
         setCharacters(response.data.results);
-        // console.log(response.data.results);
       })
       .catch((error) => {
         console.log("Bruh!", error);
       });
 
     const results = characters.filter((character) => {
-      character.name.toLowerCase().includes(searchName);
+      return character.name.toLowerCase().includes(searchName.toLowerCase());
     });
+
     setSearchResults(results);
-  }, [searchName]);
+  }, [characters, searchName]);
+
+  const handleChange = (event) => {
+    setSearchName(event.target.value);
+  };
 
   return (
     <div className="App">
@@ -57,8 +57,7 @@ const App = () => {
         <Row>
           <Col sm="12" md={{size: 6, offset: 3}}>
             {" "}
-            {characters.map((character) => {
-              console.log(searchResults);
+            {searchResults.map((character) => {
               return (
                 <Character
                   key={character.name}
